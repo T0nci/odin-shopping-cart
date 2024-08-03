@@ -1,7 +1,7 @@
 import App from "./Components/App/App";
 import Shop from "./Components/Shop/Shop";
 import Cart from "./Components/Cart/Cart";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 const routes = [
   {
