@@ -23,7 +23,7 @@ const NavBar = ({ items }) => {
           <Link to="/cart" state={items} aria-label="Cart">
             <img src={CartLogo} alt="" />
           </Link>
-          <div>{items.length}</div>
+          <div data-testid="cart-size">{items.length}</div>
         </div>
       </nav>
     </>

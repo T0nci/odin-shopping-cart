@@ -75,8 +75,10 @@ describe("NavBar component", () => {
                 src="/src/icons/cart.svg"
               />
             </a>
-            <div>
-              #
+            <div
+              data-testid="cart-size"
+            >
+              0
             </div>
           </div>
         </nav>
@@ -103,5 +105,35 @@ describe("NavBar component", () => {
 
     await user.click(cartLink);
     expect(mocks.handleClick).toHaveBeenCalledWith("/cart");
+  });
+
+  it("shows correct number of items", async () => {
+    const items = [
+      {
+        id: 1,
+        title: "a",
+        price: 1,
+        image: "example-url",
+        quantity: 1,
+      },
+      {
+        id: 2,
+        title: "b",
+        price: 2,
+        image: "example-url",
+        quantity: 2,
+      },
+      {
+        id: 3,
+        title: "c",
+        price: 3,
+        image: "example-url",
+        quantity: 3,
+      },
+    ];
+
+    act(() => render(<NavBar items={items} />));
+
+    expect(screen.getByTestId("cart-size").textContent).toBe("3");
   });
 });
