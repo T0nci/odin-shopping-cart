@@ -31,7 +31,15 @@ const NavBar = ({ items }) => {
 };
 
 NavBar.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      image: PropTypes.string,
+      quantity: PropTypes.number,
+    }),
+  ).isRequired,
 };
 
 export default NavBar;
