@@ -80,8 +80,10 @@ describe("App component", () => {
                 src="/src/icons/cart.svg"
               />
             </a>
-            <div>
-              #
+            <div
+              data-testid="cart-size"
+            >
+              0
             </div>
           </div>
         </nav>
