@@ -12,10 +12,12 @@ const routes = [
   {
     path: "shop",
     element: <Shop />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "cart",
     element: <Cart />,
+    errorElement: <ErrorPage />,
   },
 ];
 
