@@ -28,7 +28,7 @@ describe("AddItemButton Component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <button>
-          Add Item
+          Add To Cart
           <img
             alt=""
             src="/src/icons/cart_add.svg"

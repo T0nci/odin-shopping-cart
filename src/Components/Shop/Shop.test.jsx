@@ -152,7 +152,7 @@ describe("Shop Component", () => {
                 </button>
               </div>
               <button>
-                Add Item
+                Add To Cart
                 <img
                   alt=""
                   src="/src/icons/cart_add.svg"
@@ -190,7 +190,7 @@ describe("Shop Component", () => {
                 </button>
               </div>
               <button>
-                Add Item
+                Add To Cart
                 <img
                   alt=""
                   src="/src/icons/cart_add.svg"
@@ -228,7 +228,7 @@ describe("Shop Component", () => {
                 </button>
               </div>
               <button>
-                Add Item
+                Add To Cart
                 <img
                   alt=""
                   src="/src/icons/cart_add.svg"
@@ -336,7 +336,7 @@ describe("Shop Component", () => {
     await user.click(screen.getByRole("button", { name: "-" }));
     expect(parseInt(input.value)).toBe(1); // Quantity needs to be 1 to add to cart
 
-    await user.click(screen.getByRole("button", { name: "Add Item" }));
+    await user.click(screen.getByRole("button", { name: "Add To Cart" }));
     expect(parseInt(input.value)).toBe(0);
     expect(parseInt(screen.getByTestId("cart-size").textContent)).toBe(1);
   });

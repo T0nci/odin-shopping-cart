@@ -32,7 +32,7 @@ const AddItemButton = ({ item, items, setItems, setShop }) => {
   return (
     <>
       <button onClick={updateCart}>
-        Add Item
+        Add To Cart
         <img src={CartAddLogo} alt="" />
       </button>
     </>
