@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Shop from "./Shop";
+import { useState } from "react";
 
 // eslint-disable-next-line no-undef
 global.fetch = vi.fn();
@@ -10,10 +11,7 @@ vi.mock(import("../../helpers"), async (importOriginal) => {
   const imports = await importOriginal();
 
   const useCustomLocationState = () => {
-    let items = [];
-    const setItems = (newItems) => (items = newItems);
-
-    return [items, setItems];
+    return useState([]);
   };
 
   return { ...imports, useCustomLocationState };
@@ -137,6 +135,29 @@ describe("Shop Component", () => {
                 $
                 1
               </p>
+              <div>
+                <p>
+                  Quantity:
+                </p>
+                <button>
+                  -
+                </button>
+                <input
+                  name="quantity"
+                  type="tel"
+                  value="0"
+                />
+                <button>
+                  +
+                </button>
+              </div>
+              <button>
+                Add Item
+                <img
+                  alt=""
+                  src="/src/icons/cart_add.svg"
+                />
+              </button>
             </li>
             <li>
               <img
@@ -152,6 +173,29 @@ describe("Shop Component", () => {
                 $
                 2
               </p>
+              <div>
+                <p>
+                  Quantity:
+                </p>
+                <button>
+                  -
+                </button>
+                <input
+                  name="quantity"
+                  type="tel"
+                  value="0"
+                />
+                <button>
+                  +
+                </button>
+              </div>
+              <button>
+                Add Item
+                <img
+                  alt=""
+                  src="/src/icons/cart_add.svg"
+                />
+              </button>
             </li>
             <li>
               <img
@@ -167,6 +211,29 @@ describe("Shop Component", () => {
                 $
                 3
               </p>
+              <div>
+                <p>
+                  Quantity:
+                </p>
+                <button>
+                  -
+                </button>
+                <input
+                  name="quantity"
+                  type="tel"
+                  value="0"
+                />
+                <button>
+                  +
+                </button>
+              </div>
+              <button>
+                Add Item
+                <img
+                  alt=""
+                  src="/src/icons/cart_add.svg"
+                />
+              </button>
             </li>
           </ul>
         </main>
@@ -236,5 +303,41 @@ describe("Shop Component", () => {
         </main>
       </div>
     `);
+  });
+
+  it("adds an item to cart correctly", async () => {
+    const user = userEvent.setup();
+
+    const fetchedItems = [
+      {
+        id: 1,
+        title: "a",
+        price: 1,
+        image: "example-url",
+      },
+    ];
+
+    const json = () => {
+      return Promise.resolve(fetchedItems);
+    };
+
+    fetch.mockResolvedValueOnce({ json });
+
+    await act(() => render(<Shop />));
+
+    const input = screen.getByRole("textbox");
+
+    await user.type(input, "1");
+    expect(parseInt(input.value)).toBe(1);
+
+    await user.click(screen.getByRole("button", { name: "+" }));
+    expect(parseInt(input.value)).toBe(2);
+
+    await user.click(screen.getByRole("button", { name: "-" }));
+    expect(parseInt(input.value)).toBe(1); // Quantity needs to be 1 to add to cart
+
+    await user.click(screen.getByRole("button", { name: "Add Item" }));
+    expect(parseInt(input.value)).toBe(0);
+    expect(parseInt(screen.getByTestId("cart-size").textContent)).toBe(1);
   });
 });

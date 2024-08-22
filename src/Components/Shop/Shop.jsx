@@ -1,4 +1,6 @@
 import NavBar from "../NavBar/NavBar";
+import QuantityInput from "../QuantityInput/QuantityInput";
+import AddItemButton from "../AddItemButton/AddItemButton";
 import { useCustomLocationState } from "../../helpers";
 import { useEffect, useState } from "react";
 
@@ -53,6 +55,13 @@ const Shop = () => {
                   <img src={item.image} alt="" width="200" height="200" />
                   <p>{item.title}</p>
                   <p>${item.price}</p>
+                  <QuantityInput item={item} shop={shop} setShop={setShop} />
+                  <AddItemButton
+                    item={item}
+                    items={items}
+                    setItems={setItems}
+                    setShop={setShop}
+                  />
                 </li>
               );
             })}
