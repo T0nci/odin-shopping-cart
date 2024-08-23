@@ -21,7 +21,8 @@ vi.mock(import("../../helpers"), async (importOriginal) => {
 vi.mock(import("react-router-dom"), async (importOriginal) => {
   const imports = await importOriginal();
 
-  const newLink = ({ children, to, ...props }) => {
+  // eslint-disable-next-line no-unused-vars
+  const newLink = ({ children, to, state: _, ...props }) => {
     return (
       <a
         href={to}
@@ -84,7 +85,6 @@ describe("Shop Component", () => {
             <li>
               <a
                 href="/"
-                state=""
               >
                 Home
               </a>
@@ -92,7 +92,6 @@ describe("Shop Component", () => {
             <li>
               <a
                 href="/shop"
-                state=""
               >
                 Shop
               </a>
@@ -102,7 +101,6 @@ describe("Shop Component", () => {
             <a
               aria-label="Cart"
               href="/cart"
-              state=""
             >
               <img
                 alt=""
@@ -261,7 +259,6 @@ describe("Shop Component", () => {
             <li>
               <a
                 href="/"
-                state=""
               >
                 Home
               </a>
@@ -269,7 +266,6 @@ describe("Shop Component", () => {
             <li>
               <a
                 href="/shop"
-                state=""
               >
                 Shop
               </a>
@@ -279,7 +275,6 @@ describe("Shop Component", () => {
             <a
               aria-label="Cart"
               href="/cart"
-              state=""
             >
               <img
                 alt=""
