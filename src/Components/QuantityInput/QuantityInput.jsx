@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 
-const QuantityInput = ({ item, setShop }) => {
+const QuantityInput = ({ item, setItems }) => {
   const handleChange = (e) => {
     const string = e.target.value;
 
     if (string.length === 0)
-      setShop((prevShop) =>
-        prevShop.map((shopItem) => {
+      setItems((prevItems) =>
+        prevItems.map((shopItem) => {
           if (item.id === shopItem.id)
             return {
               ...item,
@@ -17,8 +17,8 @@ const QuantityInput = ({ item, setShop }) => {
         }),
       );
     else if (/^[0-9]{1,3}$/.test(string))
-      setShop((prevShop) =>
-        prevShop.map((shopItem) => {
+      setItems((prevItems) =>
+        prevItems.map((shopItem) => {
           if (item.id === shopItem.id)
             return {
               ...item,
@@ -37,8 +37,8 @@ const QuantityInput = ({ item, setShop }) => {
     if (operation === "-") {
       if (item.quantity === 0) return;
 
-      setShop((prevShop) =>
-        prevShop.map((shopItem) => {
+      setItems((prevItems) =>
+        prevItems.map((shopItem) => {
           if (item.id === shopItem.id)
             return { ...item, quantity: item.quantity - 1 };
 
@@ -48,8 +48,8 @@ const QuantityInput = ({ item, setShop }) => {
     } else if (operation === "+") {
       if (item.quantity === 999) return;
 
-      setShop((prevShop) =>
-        prevShop.map((shopItem) => {
+      setItems((prevItems) =>
+        prevItems.map((shopItem) => {
           if (item.id === shopItem.id)
             return { ...item, quantity: item.quantity + 1 };
 
@@ -86,7 +86,7 @@ const ItemObjectShape = {
 
 QuantityInput.propTypes = {
   item: PropTypes.exact(ItemObjectShape).isRequired,
-  setShop: PropTypes.func.isRequired,
+  setItems: PropTypes.func.isRequired,
 };
 
 export default QuantityInput;

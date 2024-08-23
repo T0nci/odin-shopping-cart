@@ -6,10 +6,10 @@ vi.mock(import("../../helpers"), async (importOriginal) => {
   const imports = await importOriginal();
 
   const useCustomLocationState = () => {
-    let items = [];
-    const setItems = (newItems) => (items = newItems);
+    let cart = [];
+    const setCart = (newCart) => (cart = newCart);
 
-    return [items, setItems];
+    return [cart, setCart];
   };
 
   return { ...imports, useCustomLocationState };

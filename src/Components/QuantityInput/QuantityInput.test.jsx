@@ -10,7 +10,7 @@ describe("QuantityInput component", () => {
       const { container: temp } = render(
         <QuantityInput
           item={{ id: 0, title: "", price: 0, image: "", quantity: 0 }}
-          setShop={() => {}}
+          setItems={() => {}}
         />,
       );
 
@@ -50,7 +50,7 @@ describe("QuantityInput component", () => {
     };
     const mockFn = vi.fn();
 
-    act(() => render(<QuantityInput item={item} setShop={mockFn} />));
+    act(() => render(<QuantityInput item={item} setItems={mockFn} />));
 
     const plusButton = screen.getByRole("button", { name: "+" });
     const minusButton = screen.getByRole("button", { name: "-" });
@@ -85,7 +85,7 @@ describe("QuantityInput component", () => {
     let rerender;
     act(() => {
       const { rerender: temp } = render(
-        <QuantityInput item={item} setShop={mockFn} />,
+        <QuantityInput item={item} setItems={mockFn} />,
       );
 
       rerender = temp;
@@ -95,18 +95,18 @@ describe("QuantityInput component", () => {
     await user.click(plusButton);
     expect(shop[0].quantity).toBe(1);
     // rerendering so new item value is passed in(using new quantity) instead of 0(now 1)
-    rerender(<QuantityInput item={item} setShop={mockFn} />);
+    rerender(<QuantityInput item={item} setItems={mockFn} />);
 
     const minusButton = screen.getByRole("button", { name: "-" });
     await user.click(minusButton);
     expect(shop[0].quantity).toBe(0);
     // rerendering so new item value is passed in(using new quantity) instead of 1(now 0)
-    rerender(<QuantityInput item={item} setShop={mockFn} />);
+    rerender(<QuantityInput item={item} setItems={mockFn} />);
 
     const input = screen.getByRole("textbox");
     await user.type(input, "1");
     // rerendering so new item value is passed in(using new quantity) instead of 0(now 1)
-    rerender(<QuantityInput item={item} setShop={mockFn} />);
+    rerender(<QuantityInput item={item} setItems={mockFn} />);
     await user.type(input, "2");
     expect(shop[0].quantity).toBe(12);
   });

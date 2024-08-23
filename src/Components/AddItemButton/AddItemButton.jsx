@@ -1,20 +1,21 @@
 import CartAddLogo from "../../icons/cart_add.svg";
 import PropTypes from "prop-types";
 
-const AddItemButton = ({ item, items, setItems, setShop }) => {
+const AddItemButton = ({ item, cart, setCart, setShop }) => {
   const updateCart = () => {
     if (item.quantity < 1 || item.quantity > 999) {
       return;
     }
 
-    const foundItem = items.findIndex(
+    const foundItem = cart.findIndex(
       (searchedItem) => searchedItem.id === item.id,
     );
     if (foundItem !== -1) {
-      const newItems = items.slice();
+      // TODO: add guardrail for quantity over 999
+      const newItems = cart.slice();
       newItems[foundItem].quantity += item.quantity;
-      setItems([...newItems]);
-    } else setItems([...items, { ...item }]);
+      setCart([...newItems]);
+    } else setCart([...cart, { ...item }]);
 
     setShop((prevShop) =>
       prevShop.map((shopItem) => {
@@ -49,8 +50,8 @@ const ItemObjectShape = {
 
 AddItemButton.propTypes = {
   item: PropTypes.exact(ItemObjectShape),
-  items: PropTypes.arrayOf(PropTypes.exact(ItemObjectShape)).isRequired,
-  setItems: PropTypes.func.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.exact(ItemObjectShape)).isRequired,
+  setCart: PropTypes.func.isRequired,
   setShop: PropTypes.func.isRequired,
 };
 

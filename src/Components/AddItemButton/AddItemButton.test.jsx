@@ -16,8 +16,8 @@ describe("AddItemButton Component", () => {
             image: "",
             quantity: 0,
           }}
-          items={[]}
-          setItems={() => {}}
+          cart={[]}
+          setCart={() => {}}
           setShop={() => {}}
         />,
       );
@@ -53,8 +53,8 @@ describe("AddItemButton Component", () => {
             image: "",
             quantity: 1,
           }}
-          items={[]}
-          setItems={mockFn}
+          cart={[]}
+          setCart={mockFn}
           setShop={mockFn1}
         />,
       ),
@@ -84,8 +84,8 @@ describe("AddItemButton Component", () => {
             image: "",
             quantity: 0,
           }}
-          items={[]}
-          setItems={mockFn}
+          cart={[]}
+          setCart={mockFn}
           setShop={mockFn1}
         />,
       ),
@@ -110,8 +110,8 @@ describe("AddItemButton Component", () => {
             image: "",
             quantity: 1000,
           }}
-          items={[]}
-          setItems={mockFn}
+          cart={[]}
+          setCart={mockFn}
           setShop={mockFn1}
         />,
       ),
@@ -128,9 +128,9 @@ describe("AddItemButton Component", () => {
   it("updates cart with product if product isn't in cart", async () => {
     const user = userEvent.setup();
 
-    let items = [];
+    let cart = [];
     const mockFn = vi.fn();
-    mockFn.mockImplementation((newItems) => (items = newItems));
+    mockFn.mockImplementation((newCart) => (cart = newCart));
     let shop = [
       {
         id: 0,
@@ -156,8 +156,8 @@ describe("AddItemButton Component", () => {
             image: "",
             quantity: 1,
           }}
-          items={items}
-          setItems={mockFn}
+          cart={cart}
+          setCart={mockFn}
           setShop={mockFn1}
         />,
       ),
@@ -167,7 +167,7 @@ describe("AddItemButton Component", () => {
 
     await user.click(button);
 
-    expect(items).toEqual([
+    expect(cart).toEqual([
       { id: 0, title: "", price: 0, image: "", quantity: 1 },
     ]);
     expect(shop).toEqual([
@@ -178,7 +178,7 @@ describe("AddItemButton Component", () => {
   it("updates cart with product if product is in cart", async () => {
     const user = userEvent.setup();
 
-    let items = [
+    let cart = [
       {
         id: 0,
         title: "",
@@ -188,7 +188,7 @@ describe("AddItemButton Component", () => {
       },
     ];
     const mockFn = vi.fn();
-    mockFn.mockImplementation((newItems) => (items = newItems));
+    mockFn.mockImplementation((newCart) => (cart = newCart));
     let shop = [
       {
         id: 0,
@@ -214,8 +214,8 @@ describe("AddItemButton Component", () => {
             image: "",
             quantity: 1,
           }}
-          items={items}
-          setItems={mockFn}
+          cart={cart}
+          setCart={mockFn}
           setShop={mockFn1}
         />,
       ),
@@ -225,7 +225,7 @@ describe("AddItemButton Component", () => {
 
     await user.click(button);
 
-    expect(items).toEqual([
+    expect(cart).toEqual([
       { id: 0, title: "", price: 0, image: "", quantity: 2 },
     ]);
     expect(shop).toEqual([

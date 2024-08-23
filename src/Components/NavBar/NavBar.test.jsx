@@ -35,7 +35,7 @@ describe("NavBar component", () => {
   it("renders NavBar", () => {
     let container;
     act(() => {
-      const { container: newContainer } = render(<NavBar items={[]} />);
+      const { container: newContainer } = render(<NavBar cart={[]} />);
 
       container = newContainer;
     });
@@ -90,7 +90,7 @@ describe("NavBar component", () => {
     const user = userEvent.setup();
 
     act(() => {
-      render(<NavBar items={[]} />);
+      render(<NavBar cart={[]} />);
     });
 
     const homeLink = screen.getByRole("link", { name: "Home" });
@@ -107,8 +107,8 @@ describe("NavBar component", () => {
     expect(mocks.handleClick).toHaveBeenCalledWith("/cart");
   });
 
-  it("shows correct number of items", async () => {
-    const items = [
+  it("shows correct number of items in cart", async () => {
+    const cart = [
       {
         id: 1,
         title: "a",
@@ -132,7 +132,7 @@ describe("NavBar component", () => {
       },
     ];
 
-    act(() => render(<NavBar items={items} />));
+    act(() => render(<NavBar cart={cart} />));
 
     expect(screen.getByTestId("cart-size").textContent).toBe("3");
   });

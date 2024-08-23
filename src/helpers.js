@@ -9,9 +9,9 @@ const useCustomLocationState = () => {
     initialArray = [...state];
   }
 
-  const [items, setItems] = useState(initialArray);
+  const [cart, setCart] = useState(initialArray);
 
-  return [items, setItems];
+  return [cart, setCart];
 };
 
 const roundNumber = (number, toDecimalPlaces) => {

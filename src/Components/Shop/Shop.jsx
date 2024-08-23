@@ -5,7 +5,7 @@ import { useCustomLocationState } from "../../helpers";
 import { useEffect, useState } from "react";
 
 const Shop = () => {
-  const [items, setItems] = useCustomLocationState();
+  const [cart, setCart] = useCustomLocationState();
   const [shop, setShop] = useState("loading");
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Shop = () => {
 
   return (
     <>
-      <NavBar items={items} />
+      <NavBar cart={cart} />
       <main>
         <header>Shop</header>
         {shop === "error" ? (
@@ -55,11 +55,11 @@ const Shop = () => {
                   <img src={item.image} alt="" width="200" height="200" />
                   <p>{item.title}</p>
                   <p>${item.price}</p>
-                  <QuantityInput item={item} shop={shop} setShop={setShop} />
+                  <QuantityInput item={item} setItems={setShop} />
                   <AddItemButton
                     item={item}
-                    items={items}
-                    setItems={setItems}
+                    cart={cart}
+                    setCart={setCart}
                     setShop={setShop}
                   />
                 </li>
