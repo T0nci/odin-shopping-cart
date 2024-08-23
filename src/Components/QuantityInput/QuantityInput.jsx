@@ -69,6 +69,7 @@ const QuantityInput = ({ item, setItems }) => {
           name="quantity"
           value={item.quantity}
           onChange={handleChange}
+          autoComplete="off"
         />
         <button onClick={handleQuantityClick}>+</button>
       </div>
