@@ -11,9 +11,13 @@ const AddItemButton = ({ item, cart, setCart, setShop }) => {
       (searchedItem) => searchedItem.id === item.id,
     );
     if (foundItem !== -1) {
-      // TODO: add guardrail for quantity over 999
       const newItems = cart.slice();
       newItems[foundItem].quantity += item.quantity;
+
+      // If the quantity went over 999 reset it to 999
+      if (newItems[foundItem].quantity > 999)
+        newItems[foundItem].quantity = 999;
+
       setCart([...newItems]);
     } else setCart([...cart, { ...item }]);
 
