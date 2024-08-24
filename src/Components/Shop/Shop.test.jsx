@@ -141,6 +141,7 @@ describe("Shop Component", () => {
                   -
                 </button>
                 <input
+                  autocomplete="off"
                   name="quantity"
                   type="tel"
                   value="0"
@@ -179,6 +180,7 @@ describe("Shop Component", () => {
                   -
                 </button>
                 <input
+                  autocomplete="off"
                   name="quantity"
                   type="tel"
                   value="0"
@@ -217,6 +219,7 @@ describe("Shop Component", () => {
                   -
                 </button>
                 <input
+                  autocomplete="off"
                   name="quantity"
                   type="tel"
                   value="0"

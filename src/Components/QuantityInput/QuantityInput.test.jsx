@@ -27,6 +27,7 @@ describe("QuantityInput component", () => {
             -
           </button>
           <input
+            autocomplete="off"
             name="quantity"
             type="tel"
             value="0"
