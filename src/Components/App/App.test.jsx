@@ -1,41 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, act } from "@testing-library/react";
 import App from "./App";
-
-vi.mock(import("../../helpers"), async (importOriginal) => {
-  const imports = await importOriginal();
-
-  const useCustomLocationState = () => {
-    let cart = [];
-    const setCart = (newCart) => (cart = newCart);
-
-    return [cart, setCart];
-  };
-
-  return { ...imports, useCustomLocationState };
-});
-
-// Link needs to be mocked because it's in NavBar
-vi.mock(import("react-router-dom"), async (importOriginal) => {
-  const imports = await importOriginal();
-
-  // eslint-disable-next-line no-unused-vars
-  const newLink = ({ children, to, state: _, ...props }) => {
-    return (
-      <a
-        href={to}
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-        {...props}
-      >
-        {children}
-      </a>
-    );
-  };
-
-  return { ...imports, Link: newLink };
-});
 
 describe("App component", () => {
   it("renders App", () => {
@@ -48,43 +13,6 @@ describe("App component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <nav>
-          <h1>
-            FakeStore
-          </h1>
-          <ul>
-            <li>
-              <a
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/shop"
-              >
-                Shop
-              </a>
-            </li>
-          </ul>
-          <div>
-            <a
-              aria-label="Cart"
-              href="/cart"
-            >
-              <img
-                alt=""
-                src="/src/icons/cart.svg"
-              />
-            </a>
-            <div
-              data-testid="cart-size"
-            >
-              0
-            </div>
-          </div>
-        </nav>
         <main>
           <header>
             Home

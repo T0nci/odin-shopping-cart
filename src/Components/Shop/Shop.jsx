@@ -1,11 +1,10 @@
-import NavBar from "../NavBar/NavBar";
 import QuantityInput from "../QuantityInput/QuantityInput";
 import AddItemButton from "../AddItemButton/AddItemButton";
-import { useCustomLocationState } from "../../helpers";
+import { useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Shop = () => {
-  const [cart, setCart] = useCustomLocationState();
+  const [cart, setCart] = useOutletContext();
   const [shop, setShop] = useState("loading");
 
   useEffect(() => {
@@ -40,7 +39,6 @@ const Shop = () => {
 
   return (
     <>
-      <NavBar cart={cart} />
       <main>
         <header>Shop</header>
         {shop === "error" ? (

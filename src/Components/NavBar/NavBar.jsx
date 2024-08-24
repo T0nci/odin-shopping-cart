@@ -1,45 +1,30 @@
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Link, Outlet } from "react-router-dom";
 import CartLogo from "../../icons/cart.svg";
+import { useState } from "react";
 
-const NavBar = ({ cart }) => {
+const NavBar = () => {
+  const [cart, setCart] = useState([]);
+
   return (
     <>
       <nav>
-        <h1>FakeStore</h1>
         <ul>
           <li>
-            <Link to="/" state={cart}>
-              Home
-            </Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/shop" state={cart}>
-              Shop
-            </Link>
+            <Link to="/shop">Shop</Link>
           </li>
         </ul>
-        <div>
-          <Link to="/cart" state={cart} aria-label="Cart">
-            <img src={CartLogo} alt="" />
-          </Link>
+        <h1>FakeStore</h1>
+        <Link to="/cart" aria-label="Cart">
+          <img src={CartLogo} alt="" />
           <div data-testid="cart-size">{cart.length}</div>
-        </div>
+        </Link>
       </nav>
+      <Outlet context={[cart, setCart]} />
     </>
   );
-};
-
-NavBar.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      price: PropTypes.number,
-      image: PropTypes.string,
-      quantity: PropTypes.number,
-    }),
-  ).isRequired,
 };
 
 export default NavBar;

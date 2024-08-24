@@ -1,15 +1,14 @@
-import NavBar from "../NavBar/NavBar";
 import QuantityInput from "../QuantityInput/QuantityInput";
-import { useCustomLocationState, roundNumber } from "../../helpers";
-import { Link, useNavigate } from "react-router-dom";
+import CartCheckoutLogo from "../../icons/cart_checkout.svg";
+import { roundNumber } from "../../helpers";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 const Cart = () => {
-  const [cart, setCart] = useCustomLocationState();
+  const [cart, setCart] = useOutletContext();
   const navigate = useNavigate();
 
   return (
     <>
-      <NavBar cart={cart} />
       <main>
         {cart.length === 0 ? (
           <p>
@@ -54,6 +53,7 @@ const Cart = () => {
                 }}
               >
                 Checkout
+                <img src={CartCheckoutLogo} alt="" />
               </button>
             </div>
           </>

@@ -2,41 +2,18 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Shop from "./Shop";
-import { useState } from "react";
 
 // eslint-disable-next-line no-undef
 global.fetch = vi.fn();
 
-vi.mock(import("../../helpers"), async (importOriginal) => {
-  const imports = await importOriginal();
+const mocks = vi.hoisted(() => ({ setCart: vi.fn() }));
 
-  const useCustomLocationState = () => {
-    return useState([]);
-  };
-
-  return { ...imports, useCustomLocationState };
-});
-
-// Link needs to be mocked because it's in NavBar
 vi.mock(import("react-router-dom"), async (importOriginal) => {
   const imports = await importOriginal();
 
-  // eslint-disable-next-line no-unused-vars
-  const newLink = ({ children, to, state: _, ...props }) => {
-    return (
-      <a
-        href={to}
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-        {...props}
-      >
-        {children}
-      </a>
-    );
-  };
+  const newUseOutletContext = () => [[], mocks.setCart];
 
-  return { ...imports, Link: newLink };
+  return { ...imports, useOutletContext: newUseOutletContext };
 });
 
 describe("Shop Component", () => {
@@ -77,43 +54,6 @@ describe("Shop Component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <nav>
-          <h1>
-            FakeStore
-          </h1>
-          <ul>
-            <li>
-              <a
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/shop"
-              >
-                Shop
-              </a>
-            </li>
-          </ul>
-          <div>
-            <a
-              aria-label="Cart"
-              href="/cart"
-            >
-              <img
-                alt=""
-                src="/src/icons/cart.svg"
-              />
-            </a>
-            <div
-              data-testid="cart-size"
-            >
-              0
-            </div>
-          </div>
-        </nav>
         <main>
           <header>
             Shop
@@ -254,43 +194,6 @@ describe("Shop Component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <nav>
-          <h1>
-            FakeStore
-          </h1>
-          <ul>
-            <li>
-              <a
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/shop"
-              >
-                Shop
-              </a>
-            </li>
-          </ul>
-          <div>
-            <a
-              aria-label="Cart"
-              href="/cart"
-            >
-              <img
-                alt=""
-                src="/src/icons/cart.svg"
-              />
-            </a>
-            <div
-              data-testid="cart-size"
-            >
-              0
-            </div>
-          </div>
-        </nav>
         <main>
           <header>
             Shop
@@ -336,6 +239,7 @@ describe("Shop Component", () => {
 
     await user.click(screen.getByRole("button", { name: "Add To Cart" }));
     expect(parseInt(input.value)).toBe(0);
-    expect(parseInt(screen.getByTestId("cart-size").textContent)).toBe(1);
+    // Expect the first argument to the last call to have a length of 1
+    expect(mocks.setCart.mock.lastCall[0].length).toBe(1);
   });
 });

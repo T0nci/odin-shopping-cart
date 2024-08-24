@@ -13,8 +13,7 @@ const mocks = vi.hoisted(() => {
 vi.mock(import("react-router-dom"), async (importOriginal) => {
   const imports = await importOriginal();
 
-  // eslint-disable-next-line no-unused-vars
-  const newLink = ({ children, to, state: _, ...props }) => {
+  const newLink = ({ children, to, ...props }) => {
     return (
       <a
         href={to}
@@ -32,81 +31,14 @@ vi.mock(import("react-router-dom"), async (importOriginal) => {
   return { ...imports, Link: newLink };
 });
 
-describe("NavBar component", () => {
-  it("renders NavBar", () => {
-    let container;
-    act(() => {
-      const { container: newContainer } = render(<NavBar cart={[]} />);
+vi.mock(import("react"), async (importOriginal) => {
+  const imports = await importOriginal();
 
-      container = newContainer;
-    });
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <nav>
-          <h1>
-            FakeStore
-          </h1>
-          <ul>
-            <li>
-              <a
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/shop"
-              >
-                Shop
-              </a>
-            </li>
-          </ul>
-          <div>
-            <a
-              aria-label="Cart"
-              href="/cart"
-            >
-              <img
-                alt=""
-                src="/src/icons/cart.svg"
-              />
-            </a>
-            <div
-              data-testid="cart-size"
-            >
-              0
-            </div>
-          </div>
-        </nav>
-      </div>
-    `);
-  });
-
-  it("handles clicks correctly", async () => {
-    const user = userEvent.setup();
-
-    act(() => {
-      render(<NavBar cart={[]} />);
-    });
-
-    const homeLink = screen.getByRole("link", { name: "Home" });
-    const shopLink = screen.getByRole("link", { name: "Shop" });
-    const cartLink = screen.getByRole("link", { name: "Cart" });
-
-    await user.click(homeLink);
-    expect(mocks.handleClick).toHaveBeenCalledWith("/");
-
-    await user.click(shopLink);
-    expect(mocks.handleClick).toHaveBeenCalledWith("/shop");
-
-    await user.click(cartLink);
-    expect(mocks.handleClick).toHaveBeenCalledWith("/cart");
-  });
-
-  it("shows correct number of items in cart", async () => {
-    const cart = [
+  const newUseState = vi.fn();
+  newUseState.mockImplementationOnce(() => [[], () => {}]);
+  newUseState.mockImplementationOnce(() => [[], () => {}]);
+  newUseState.mockImplementationOnce(() => [
+    [
       {
         id: 1,
         title: "a",
@@ -128,9 +60,86 @@ describe("NavBar component", () => {
         image: "example-url",
         quantity: 3,
       },
-    ];
+    ],
+    () => {},
+  ]);
 
-    act(() => render(<NavBar cart={cart} />));
+  return { ...imports, useState: newUseState };
+});
+
+describe("NavBar component", () => {
+  it("renders NavBar", () => {
+    let container;
+    act(() => {
+      const { container: newContainer } = render(<NavBar />);
+
+      container = newContainer;
+    });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <a
+                href="/"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/shop"
+              >
+                Shop
+              </a>
+            </li>
+          </ul>
+          <h1>
+            FakeStore
+          </h1>
+          <a
+            aria-label="Cart"
+            href="/cart"
+          >
+            <img
+              alt=""
+              src="/src/icons/cart.svg"
+            />
+            <div
+              data-testid="cart-size"
+            >
+              0
+            </div>
+          </a>
+        </nav>
+      </div>
+    `);
+  });
+
+  it("handles clicks correctly", async () => {
+    const user = userEvent.setup();
+
+    act(() => {
+      render(<NavBar />);
+    });
+
+    const homeLink = screen.getByRole("link", { name: "Home" });
+    const shopLink = screen.getByRole("link", { name: "Shop" });
+    const cartLink = screen.getByRole("link", { name: "Cart" });
+
+    await user.click(homeLink);
+    expect(mocks.handleClick).toHaveBeenCalledWith("/");
+
+    await user.click(shopLink);
+    expect(mocks.handleClick).toHaveBeenCalledWith("/shop");
+
+    await user.click(cartLink);
+    expect(mocks.handleClick).toHaveBeenCalledWith("/cart");
+  });
+
+  it("shows correct number of items in cart", async () => {
+    act(() => render(<NavBar />));
 
     expect(screen.getByTestId("cart-size").textContent).toBe("3");
   });

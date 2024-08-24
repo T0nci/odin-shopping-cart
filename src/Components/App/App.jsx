@@ -1,12 +1,6 @@
-import NavBar from "../NavBar/NavBar";
-import { useCustomLocationState } from "../../helpers";
-
 const App = () => {
-  const [cart] = useCustomLocationState();
-
   return (
     <>
-      <NavBar cart={cart} />
       <main>
         <header>Home</header>
         <h1>Welcome to FakeStore!</h1>

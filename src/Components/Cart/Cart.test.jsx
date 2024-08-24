@@ -12,30 +12,11 @@ const mocks = vi.hoisted(() => {
   };
 });
 
-vi.mock(import("../../helpers"), async (importOriginal) => {
-  const imports = await importOriginal();
-
-  // Using vitest's mock functions, we return an empty cart the second time and
-  // then keep returning a cart with 1 item(replaced conditional call of
-  // useState and constant call of useState with only one initial state)
-  const mockFn = vi.fn();
-  mockFn.mockImplementationOnce(() =>
-    useState([{ id: 1, title: "", price: 1, image: "", quantity: 1 }]),
-  );
-  mockFn.mockImplementationOnce(() => useState([]));
-  mockFn.mockImplementation(() =>
-    useState([{ id: 1, title: "", price: 1, image: "", quantity: 1 }]),
-  );
-
-  return { ...imports, useCustomLocationState: mockFn };
-});
-
-// Link needs to be mocked because it's in NavBar
+// Link needs to be mocked because it's in the main container if cart is empty
 vi.mock(import("react-router-dom"), async (importOriginal) => {
   const imports = await importOriginal();
 
-  // eslint-disable-next-line no-unused-vars
-  const newLink = ({ children, to, state: _, ...props }) => {
+  const newLink = ({ children, to, ...props }) => {
     return (
       <a
         href={to}
@@ -52,7 +33,23 @@ vi.mock(import("react-router-dom"), async (importOriginal) => {
 
   const newUseNavigate = () => mocks.link;
 
-  return { ...imports, Link: newLink, useNavigate: newUseNavigate };
+  // Using vitest's mock functions, we return an empty cart the second time and
+  // then keep returning a cart with 1 item
+  const newUseOutletContext = vi.fn();
+  newUseOutletContext.mockImplementationOnce(() =>
+    useState([{ id: 1, title: "", price: 1, image: "", quantity: 1 }]),
+  );
+  newUseOutletContext.mockImplementationOnce(() => useState([]));
+  newUseOutletContext.mockImplementation(() =>
+    useState([{ id: 1, title: "", price: 1, image: "", quantity: 1 }]),
+  );
+
+  return {
+    ...imports,
+    Link: newLink,
+    useNavigate: newUseNavigate,
+    useOutletContext: newUseOutletContext,
+  };
 });
 
 describe("Cart Component", () => {
@@ -66,43 +63,6 @@ describe("Cart Component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <nav>
-          <h1>
-            FakeStore
-          </h1>
-          <ul>
-            <li>
-              <a
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/shop"
-              >
-                Shop
-              </a>
-            </li>
-          </ul>
-          <div>
-            <a
-              aria-label="Cart"
-              href="/cart"
-            >
-              <img
-                alt=""
-                src="/src/icons/cart.svg"
-              />
-            </a>
-            <div
-              data-testid="cart-size"
-            >
-              1
-            </div>
-          </div>
-        </nav>
         <main>
           <ul>
             <li>
@@ -147,6 +107,10 @@ describe("Cart Component", () => {
             </p>
             <button>
               Checkout
+              <img
+                alt=""
+                src="/src/icons/cart_checkout.svg"
+              />
             </button>
           </div>
         </main>
@@ -167,7 +131,7 @@ describe("Cart Component", () => {
     const user = userEvent.setup();
     act(() => render(<Cart />));
 
-    const list = screen.getByRole("main").firstChild;
+    const list = screen.getByRole("list");
 
     expect(list).toBeInTheDocument();
 
