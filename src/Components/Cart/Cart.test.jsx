@@ -94,6 +94,9 @@ describe("Cart Component", () => {
                   +
                 </button>
               </div>
+              <button>
+                Remove from cart
+              </button>
               <p>
                 Total Price: $
                 1
@@ -158,5 +161,18 @@ describe("Cart Component", () => {
 
     await user.type(input, "{backspace}testing .sa?!das{backspace}");
     expect(parseInt(input.value)).toBe(0);
+  });
+
+  it("removes item from cart", async () => {
+    const user = userEvent.setup();
+    act(() => render(<Cart />));
+
+    const listItem = screen.getByRole("list").firstChild;
+
+    expect(listItem).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Remove from cart" }));
+
+    expect(listItem).not.toBeInTheDocument();
   });
 });

@@ -28,6 +28,15 @@ const Cart = () => {
                       setItems={setCart}
                       deletion={"y"}
                     />
+                    <button
+                      onClick={() =>
+                        setCart(
+                          cart.filter((cartItem) => cartItem.id !== item.id),
+                        )
+                      }
+                    >
+                      Remove from cart
+                    </button>
                     <p>
                       Total Price: ${roundNumber(item.price * item.quantity, 3)}
                     </p>
