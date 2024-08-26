@@ -55,128 +55,185 @@ describe("Shop Component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <main>
-          <header>
-            Shop
-          </header>
-          <ul>
-            <li>
-              <img
-                alt=""
-                height="200"
-                src="example-url"
-                width="200"
-              />
-              <p>
-                a
-              </p>
-              <p>
-                $
-                1
-              </p>
-              <div>
-                <p>
-                  Quantity:
-                </p>
-                <button>
-                  -
-                </button>
-                <input
-                  autocomplete="off"
-                  name="quantity"
-                  type="tel"
-                  value="0"
-                />
-                <button>
-                  +
-                </button>
-              </div>
-              <button>
-                Add To Cart
+          <div
+            class="container"
+          >
+            <header>
+              Shop
+            </header>
+            <ul
+              class="_cards_214c00"
+            >
+              <li
+                class="_card_214c00"
+              >
                 <img
                   alt=""
-                  src="/src/icons/cart_add.svg"
+                  class="_image_214c00"
+                  src="example-url"
                 />
-              </button>
-            </li>
-            <li>
-              <img
-                alt=""
-                height="200"
-                src="example-url"
-                width="200"
-              />
-              <p>
-                b
-              </p>
-              <p>
-                $
-                2
-              </p>
-              <div>
-                <p>
-                  Quantity:
+                <p
+                  class="_title_214c00"
+                >
+                  a
                 </p>
-                <button>
-                  -
+                <p
+                  class="_price_214c00"
+                >
+                  $
+                  1
+                </p>
+                <div
+                  class="_container_0320fd"
+                >
+                  <p
+                    class="_quantity_0320fd"
+                  >
+                    Quantity:
+                  </p>
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    -
+                  </button>
+                  <input
+                    autocomplete="off"
+                    class="_input_0320fd"
+                    name="quantity"
+                    type="tel"
+                    value="0"
+                  />
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="_btn_9fbe79"
+                >
+                  Add To Cart
+                  <img
+                    alt=""
+                    class="_icon_9fbe79"
+                    src="/src/icons/cart_add.svg"
+                  />
                 </button>
-                <input
-                  autocomplete="off"
-                  name="quantity"
-                  type="tel"
-                  value="0"
-                />
-                <button>
-                  +
-                </button>
-              </div>
-              <button>
-                Add To Cart
+              </li>
+              <li
+                class="_card_214c00"
+              >
                 <img
                   alt=""
-                  src="/src/icons/cart_add.svg"
+                  class="_image_214c00"
+                  src="example-url"
                 />
-              </button>
-            </li>
-            <li>
-              <img
-                alt=""
-                height="200"
-                src="example-url"
-                width="200"
-              />
-              <p>
-                c
-              </p>
-              <p>
-                $
-                3
-              </p>
-              <div>
-                <p>
-                  Quantity:
+                <p
+                  class="_title_214c00"
+                >
+                  b
                 </p>
-                <button>
-                  -
+                <p
+                  class="_price_214c00"
+                >
+                  $
+                  2
+                </p>
+                <div
+                  class="_container_0320fd"
+                >
+                  <p
+                    class="_quantity_0320fd"
+                  >
+                    Quantity:
+                  </p>
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    -
+                  </button>
+                  <input
+                    autocomplete="off"
+                    class="_input_0320fd"
+                    name="quantity"
+                    type="tel"
+                    value="0"
+                  />
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="_btn_9fbe79"
+                >
+                  Add To Cart
+                  <img
+                    alt=""
+                    class="_icon_9fbe79"
+                    src="/src/icons/cart_add.svg"
+                  />
                 </button>
-                <input
-                  autocomplete="off"
-                  name="quantity"
-                  type="tel"
-                  value="0"
-                />
-                <button>
-                  +
-                </button>
-              </div>
-              <button>
-                Add To Cart
+              </li>
+              <li
+                class="_card_214c00"
+              >
                 <img
                   alt=""
-                  src="/src/icons/cart_add.svg"
+                  class="_image_214c00"
+                  src="example-url"
                 />
-              </button>
-            </li>
-          </ul>
+                <p
+                  class="_title_214c00"
+                >
+                  c
+                </p>
+                <p
+                  class="_price_214c00"
+                >
+                  $
+                  3
+                </p>
+                <div
+                  class="_container_0320fd"
+                >
+                  <p
+                    class="_quantity_0320fd"
+                  >
+                    Quantity:
+                  </p>
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    -
+                  </button>
+                  <input
+                    autocomplete="off"
+                    class="_input_0320fd"
+                    name="quantity"
+                    type="tel"
+                    value="0"
+                  />
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="_btn_9fbe79"
+                >
+                  Add To Cart
+                  <img
+                    alt=""
+                    class="_icon_9fbe79"
+                    src="/src/icons/cart_add.svg"
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
         </main>
       </div>
     `);
@@ -195,12 +252,18 @@ describe("Shop Component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <main>
-          <header>
-            Shop
-          </header>
-          <p>
-            An error has occurred.
-          </p>
+          <div
+            class="container"
+          >
+            <header>
+              Shop
+            </header>
+            <p
+              class="_error_214c00"
+            >
+              An error has occurred.
+            </p>
+          </div>
         </main>
       </div>
     `);

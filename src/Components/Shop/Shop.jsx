@@ -1,3 +1,4 @@
+import styles from "./Shop.module.css";
 import QuantityInput from "../QuantityInput/QuantityInput";
 import AddItemButton from "../AddItemButton/AddItemButton";
 import { useOutletContext } from "react-router-dom";
@@ -40,31 +41,33 @@ const Shop = () => {
   return (
     <>
       <main>
-        <header>Shop</header>
-        {shop === "error" ? (
-          <p>An error has occurred.</p>
-        ) : shop === "loading" ? (
-          <p>Loading...</p>
-        ) : (
-          <ul>
-            {shop.map((item) => {
-              return (
-                <li key={item.id}>
-                  <img src={item.image} alt="" width="200" height="200" />
-                  <p>{item.title}</p>
-                  <p>${item.price}</p>
-                  <QuantityInput item={item} setItems={setShop} />
-                  <AddItemButton
-                    item={item}
-                    cart={cart}
-                    setCart={setCart}
-                    setShop={setShop}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        <div className="container">
+          <header>Shop</header>
+          {shop === "error" ? (
+            <p className={styles.error}>An error has occurred.</p>
+          ) : shop === "loading" ? (
+            <p className={styles.loading}>Loading...</p>
+          ) : (
+            <ul className={styles.cards}>
+              {shop.map((item) => {
+                return (
+                  <li key={item.id} className={styles.card}>
+                    <img src={item.image} alt="" className={styles.image} />
+                    <p className={styles.title}>{item.title}</p>
+                    <p className={styles.price}>${item.price}</p>
+                    <QuantityInput item={item} setItems={setShop} />
+                    <AddItemButton
+                      item={item}
+                      cart={cart}
+                      setCart={setCart}
+                      setShop={setShop}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </main>
     </>
   );
