@@ -1,6 +1,13 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import ErrorPage from "./ErrorPage";
+
+const mocks = vi.hoisted(() => {
+  return {
+    handleClick: vi.fn(),
+  };
+});
 
 vi.mock(import("react-router-dom"), async (importOriginal) => {
   const imports = await importOriginal();
@@ -12,8 +19,24 @@ vi.mock(import("react-router-dom"), async (importOriginal) => {
     status: 404,
     statusText: "Not found",
   }));
+  newUseRouteError.mockImplementationOnce(() => null);
 
-  return { ...imports, useRouteError: newUseRouteError };
+  const newLink = ({ children, to, ...props }) => {
+    return (
+      <a
+        href={to}
+        onClick={(e) => {
+          e.preventDefault();
+          mocks.handleClick(to);
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  };
+
+  return { ...imports, useRouteError: newUseRouteError, Link: newLink };
 });
 
 describe("ErrorPage component", () => {
@@ -28,8 +51,19 @@ describe("ErrorPage component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          data-testid="error"
-        />
+          class="_wrapper_804c82"
+        >
+          <p
+            class="_error_804c82"
+            data-testid="error"
+          />
+          <a
+            class="_link_804c82"
+            href="/"
+          >
+            Go back to home
+          </a>
+        </div>
       </div>
     `);
   });
@@ -39,9 +73,9 @@ describe("ErrorPage component", () => {
       render(<ErrorPage />);
     });
 
-    const div = screen.getByTestId("error");
+    const p = screen.getByTestId("error");
 
-    expect(div.textContent).toBe("Error: Internal error");
+    expect(p.textContent).toBe("Error: Internal error");
   });
 
   it("renders a response error correctly", () => {
@@ -49,8 +83,20 @@ describe("ErrorPage component", () => {
       render(<ErrorPage />);
     });
 
-    const div = screen.getByTestId("error");
+    const p = screen.getByTestId("error");
 
-    expect(div.textContent).toBe("404: Not found");
+    expect(p.textContent).toBe("404: Not found");
+  });
+
+  it("renders clickable link", async () => {
+    const user = userEvent.setup();
+
+    act(() => {
+      render(<ErrorPage />);
+    });
+
+    await user.click(screen.getByRole("link"));
+
+    expect(mocks.handleClick).toHaveBeenCalledWith("/");
   });
 });
