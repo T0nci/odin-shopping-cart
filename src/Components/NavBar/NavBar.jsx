@@ -1,5 +1,5 @@
 import styles from "./NavBar.module.css";
-import "../../global.module.css";
+import "../../global.css";
 import { Link, Outlet } from "react-router-dom";
 import CartLogo from "../../icons/cart.svg";
 import { useState } from "react";
@@ -7,7 +7,6 @@ import { useState } from "react";
 const NavBar = () => {
   const [cart, setCart] = useState([]);
 
-  // TODO: Make links reset the scroll
   return (
     <>
       <nav className={styles.navigation}>

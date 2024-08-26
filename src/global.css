@@ -151,7 +151,7 @@ meter {
 
 /* Global CSS */
 /* only classes need to be :global(), everything else is automatically global */
-:global(.container) {
+.container {
   max-width: 1500px;
   margin: 0 auto;
   padding: 1rem;
