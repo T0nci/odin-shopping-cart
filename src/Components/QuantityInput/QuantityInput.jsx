@@ -1,3 +1,4 @@
+import styles from "./QuantityInput.module.css";
 import PropTypes from "prop-types";
 
 const QuantityInput = ({ item, setItems }) => {
@@ -61,17 +62,28 @@ const QuantityInput = ({ item, setItems }) => {
 
   return (
     <>
-      <div>
-        <p>Quantity:</p>
-        <button onClick={handleQuantityClick}>-</button>
+      <div className={styles.container}>
+        <p className={styles.quantity}>Quantity:</p>
+        <button
+          onClick={handleQuantityClick}
+          className={styles["symbol-button"]}
+        >
+          -
+        </button>
         <input
           type="tel"
           name="quantity"
           value={item.quantity}
           onChange={handleChange}
           autoComplete="off"
+          className={styles.input}
         />
-        <button onClick={handleQuantityClick}>+</button>
+        <button
+          onClick={handleQuantityClick}
+          className={styles["symbol-button"]}
+        >
+          +
+        </button>
       </div>
     </>
   );

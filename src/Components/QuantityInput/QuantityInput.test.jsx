@@ -19,20 +19,29 @@ describe("QuantityInput component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <div>
-          <p>
+        <div
+          class="_container_0320fd"
+        >
+          <p
+            class="_quantity_0320fd"
+          >
             Quantity:
           </p>
-          <button>
+          <button
+            class="_symbol-button_0320fd"
+          >
             -
           </button>
           <input
             autocomplete="off"
+            class="_input_0320fd"
             name="quantity"
             type="tel"
             value="0"
           />
-          <button>
+          <button
+            class="_symbol-button_0320fd"
+          >
             +
           </button>
         </div>
