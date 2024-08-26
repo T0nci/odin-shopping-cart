@@ -64,57 +64,89 @@ describe("Cart Component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <main>
-          <ul>
-            <li>
-              <img
-                alt=""
-                height="200"
-                src=""
-                width="200"
-              />
-              <p />
-              <p>
-                $
-                1
-              </p>
-              <div>
-                <p>
-                  Quantity:
-                </p>
-                <button>
-                  -
-                </button>
-                <input
-                  autocomplete="off"
-                  name="quantity"
-                  type="tel"
-                  value="1"
+          <div
+            class="container"
+          >
+            <header>
+              Cart
+            </header>
+            <ul
+              class="_cards_bd9410"
+            >
+              <li
+                class="_card_bd9410"
+              >
+                <img
+                  alt=""
+                  class="_image_bd9410"
+                  src=""
                 />
-                <button>
-                  +
+                <p
+                  class="_title_bd9410"
+                />
+                <p
+                  class="_price_bd9410"
+                >
+                  $
+                  1
+                </p>
+                <div
+                  class="_container_0320fd"
+                >
+                  <p
+                    class="_quantity_0320fd"
+                  >
+                    Quantity:
+                  </p>
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    -
+                  </button>
+                  <input
+                    autocomplete="off"
+                    class="_input_0320fd"
+                    name="quantity"
+                    type="tel"
+                    value="1"
+                  />
+                  <button
+                    class="_symbol-button_0320fd"
+                  >
+                    +
+                  </button>
+                </div>
+                <p
+                  class="_total_bd9410"
+                >
+                  Total Price: $
+                  1
+                </p>
+                <button
+                  class="_remove_bd9410"
+                >
+                  Remove from cart
                 </button>
-              </div>
-              <button>
-                Remove from cart
-              </button>
-              <p>
-                Total Price: $
+              </li>
+            </ul>
+            <div>
+              <p
+                class="_cart-total_bd9410"
+              >
+                Cart Total: $
                 1
               </p>
-            </li>
-          </ul>
-          <div>
-            <p>
-              Cart Total: $
-              1
-            </p>
-            <button>
-              Checkout
-              <img
-                alt=""
-                src="/src/icons/cart_checkout.svg"
-              />
-            </button>
+              <button
+                class="_checkout_bd9410"
+              >
+                Checkout
+                <img
+                  alt=""
+                  class="_checkout-icon_bd9410"
+                  src="/src/icons/cart_checkout.svg"
+                />
+              </button>
+            </div>
           </div>
         </main>
       </div>

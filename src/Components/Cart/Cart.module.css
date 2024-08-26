@@ -1,0 +1,91 @@
+.empty {
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.shop-link {
+  color: #b22222;
+}
+
+.shop-link:hover {
+  cursor: pointer;
+}
+
+.shop-link:active {
+  color: #ff0000;
+}
+
+.cards {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.cards > :last-child {
+  margin-bottom: 0;
+}
+
+.card {
+  margin-bottom: 1rem;
+
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  gap: 0.5rem;
+  justify-items: center;
+  align-items: center;
+}
+
+.image {
+  composes: image from "../Shop/Shop.module.css";
+  grid-row: 1 / span 4;
+}
+
+.title {
+  composes: title from "../Shop/Shop.module.css";
+  grid-column: auto / span 2;
+}
+
+.price {
+  composes: price from "../Shop/Shop.module.css";
+  grid-column: auto / span 2;
+}
+
+.total {
+  composes: title from "../Shop/Shop.module.css";
+}
+
+.remove {
+  composes: btn from "../AddItemButton/AddItemButton.module.css";
+  background-color: #ff0000;
+  font-size: 1rem;
+  grid-column: auto / span 2;
+}
+
+.cart-total {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.checkout {
+  composes: btn from "../AddItemButton/AddItemButton.module.css";
+  background-color: #7fff00;
+  color: #000000;
+  margin: 0 auto;
+}
+
+.checkout-icon {
+  composes: icon from "../AddItemButton/AddItemButton.module.css";
+}
+
+@media screen and (max-width: 550px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    justify-items: auto;
+  }
+}
