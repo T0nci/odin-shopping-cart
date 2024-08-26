@@ -78,40 +78,62 @@ describe("NavBar component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <nav>
-          <ul>
-            <li>
-              <a
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/shop"
-              >
-                Shop
-              </a>
-            </li>
-          </ul>
-          <h1>
-            FakeStore
-          </h1>
-          <a
-            aria-label="Cart"
-            href="/cart"
+        <nav
+          class="_navigation_7ceb2b"
+        >
+          <div
+            class="container _nav_7ceb2b"
           >
-            <img
-              alt=""
-              src="/src/icons/cart.svg"
-            />
-            <div
-              data-testid="cart-size"
+            <h1
+              class="_heading_7ceb2b"
             >
-              0
-            </div>
-          </a>
+              <span
+                class="_span_7ceb2b"
+              >
+                Fake
+              </span>
+              Store
+            </h1>
+            <ul
+              class="_nav-links_7ceb2b"
+            >
+              <li>
+                <a
+                  class="_nav-link_7ceb2b"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  class="_nav-link_7ceb2b"
+                  href="/shop"
+                >
+                  Shop
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-label="Cart"
+                  class="_cart_7ceb2b"
+                  href="/cart"
+                >
+                  <img
+                    alt=""
+                    class="_cart-icon_7ceb2b"
+                    src="/src/icons/cart.svg"
+                  />
+                  <div
+                    class="_cart-size_7ceb2b"
+                    data-testid="cart-size"
+                  >
+                    0
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
     `);
