@@ -27,10 +27,13 @@ describe("AddItemButton Component", () => {
 
     expect(container).toMatchInlineSnapshot(`
       <div>
-        <button>
+        <button
+          class="_btn_9fbe79"
+        >
           Add To Cart
           <img
             alt=""
+            class="_icon_9fbe79"
             src="/src/icons/cart_add.svg"
           />
         </button>

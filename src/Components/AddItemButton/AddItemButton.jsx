@@ -1,3 +1,4 @@
+import styles from "./AddItemButton.module.css";
 import CartAddLogo from "../../icons/cart_add.svg";
 import PropTypes from "prop-types";
 
@@ -36,9 +37,9 @@ const AddItemButton = ({ item, cart, setCart, setShop }) => {
 
   return (
     <>
-      <button onClick={updateCart}>
+      <button onClick={updateCart} className={styles.btn}>
         Add To Cart
-        <img src={CartAddLogo} alt="" />
+        <img src={CartAddLogo} alt="" className={styles.icon} />
       </button>
     </>
   );
